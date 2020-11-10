@@ -15,8 +15,8 @@ export class EstadoListaComponent implements OnInit {
   columns: TableColumn[] = [
     {id: 'nome', label: 'Nome' },
     {id: 'abreviacao', label: 'Abreviação' },
-    {id: 'created_at', label: 'Criadm em' },
-    {id: 'updated_at', label: 'Editado em' },
+    {id: 'dataCriacao', label: 'Criadm em' },
+    {id: 'dataUltimaAtualizacao', label: 'Editado em' },
   ];
 
   constructor(private estadoService: EstadoService) { }

@@ -1,6 +1,6 @@
 export interface Cidade {
-    _id: string;
+    id: string;
     nome: string;
-    created_at: Date;
-    updated_at: Date;
+    dataCriacao: Date;
+    dataUltimaAtualizacao: Date;
 }

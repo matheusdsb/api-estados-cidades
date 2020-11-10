@@ -1,4 +1,5 @@
 const cidadeModel = require('../models/cidade-model');
+const estadoModel = require('../models/estado-model');
 
 function loadObjectByRequest(req) {
     return {
@@ -7,11 +8,33 @@ function loadObjectByRequest(req) {
     }
 }
 
+function geraObjetosRetorno(cidades) {
+    return [...cidades.map(c  => geraObjetoRetorno(c))]
+}
+
+function geraObjetoRetorno(cidade) {
+
+    //const estado = await estadoModel.findById(cidade.estadoId);
+
+    return {
+        id: cidade._id,
+        nome: cidade.nome,
+        estadoId: cidade.estadoId,        
+        /*estado: {
+            id: estado._id,
+            nome: estado.nome
+        },*/
+        dataCriacao: cidade.created_at.toLocaleString("pt-BR"),
+        dataUltimaAtualizacao: cidade.updated_at.toLocaleString("pt-BR")
+    }
+}
+
 module.exports = {
     async listar(req, res) {
         try {
-            const cidades = await cidadeModel.find();
-            return res.json(cidades)
+            const cidades = await cidadeModel.find()
+            const objetos = geraObjetosRetorno(cidades)
+            return res.json(objetos)            
         } catch(e) {
             res.status(400).send(e.message)
         }
