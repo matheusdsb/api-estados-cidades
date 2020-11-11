@@ -1,6 +1,7 @@
 const estadoModel = require('../models/estado-model');
 const { montaOrdenacaoViaRequest } = require('../helpers/ordenacao-helper')
-const { geraDataBr } = require('../helpers/timezone-helper')
+const { geraDataBr } = require('../helpers/timezone-helper');
+const cidadeModel = require('../models/cidade-model');
 
 function geraObjetosRetorno(estados) {
     return [...estados.map(e => geraObjetoRetorno(e))];
@@ -82,6 +83,12 @@ module.exports = {
 
             if(!estado) {
                 return res.status(404).send('Registro não encontrado')
+             }
+
+             const cidades = await cidadeModel.find({ estadoId: estado._id})
+
+             if(cidades.length > 0) {
+                return res.status(403).send('Este estado não pode ser exclúído pois possui cidades vinculdas')
              }
 
             return res.send(geraObjetoRetorno(estado));
