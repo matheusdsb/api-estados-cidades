@@ -90,6 +90,16 @@ export class CidadeCadastroComponent implements OnInit, AfterViewInit {
 
   compareWith(c1, c2): boolean {
 	  return c1 && c2 && c1.id === c2.id;
-	}
+  }
+  
+  excluir(): void {
+    this.cidadeService.excluir(this.id).subscribe(data => {
+      this.snackBar.open('Cidade excluída com sucesso!', 'fechar');
+      this.router.navigate(['/cidades'], { replaceUrl: true});
+    }, 
+    error => {
+      this.snackBar.open(error, 'fechar');
+    });
+  }
 
 }

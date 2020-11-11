@@ -38,4 +38,10 @@ export class CidadeService {
         catchError(this.handleError)
       );
   }
+
+  excluir(id: string) {
+    return this.http.delete(this.apiUrl + '/excluir/' + id).pipe(
+      catchError(this.handleError)
+    );
+  }
 }
