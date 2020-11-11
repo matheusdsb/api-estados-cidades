@@ -17,6 +17,14 @@ export class EstadoListaComponent implements OnInit {
     {id: 'abreviacao', label: 'Abreviação' },
     {id: 'dataCriacao', label: 'Criadm em' },
     {id: 'dataUltimaAtualizacao', label: 'Editado em' },
+    {
+      id: 'editar',
+      label: 'Ações',
+      tipo: 'link',
+      links: [
+        {titulo: 'Editar ', resolveLink: (row: Estado) => 'editar/' + row.id }
+      ]
+    }
   ];
 
   constructor(private estadoService: EstadoService) { }
