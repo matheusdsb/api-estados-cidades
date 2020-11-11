@@ -12,13 +12,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { EstadoService } from './services/estado.service';
 import { CidadeListaComponent } from './pages/cidade-lista/cidade-lista.component';
 import { CidadeService } from './services/cidade.service';
+import { EstadoCadastroComponent } from './pages/estado-cadastro/estado-cadastro.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { CidadeCadastroComponent } from './pages/cidade-cadastro/cidade-cadastro.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     EstadoListaComponent,
     TableComponent,
-    CidadeListaComponent
+    CidadeListaComponent,
+    EstadoCadastroComponent,
+    CidadeCadastroComponent
   ],
   imports: [
     BrowserModule,
@@ -26,9 +33,14 @@ import { CidadeService } from './services/cidade.service';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatTableModule,
+    MatSnackBarModule,
     HttpClientModule
   ],
-  providers: [EstadoService, CidadeService],
+  providers: [
+    EstadoService,
+    CidadeService,
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
