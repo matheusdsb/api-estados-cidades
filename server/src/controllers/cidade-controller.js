@@ -13,17 +13,14 @@ function geraObjetosRetorno(cidades) {
 }
 
 function geraObjetoRetorno(cidade) {
-
-    //const estado = await estadoModel.findById(cidade.estadoId);
-
     return {
         id: cidade._id,
-        nome: cidade.nome,
-        estadoId: cidade.estadoId,        
-        /*estado: {
-            id: estado._id,
-            nome: estado.nome
-        },*/
+        nome: cidade.nome,            
+        estado: cidade.estadoId ? {
+            id: cidade.estadoId._id,
+            nome: cidade.estadoId.nome,
+            abreviacao: cidade.estadoId.abreviacao
+        } : {},
         dataCriacao: cidade.created_at.toLocaleString("pt-BR"),
         dataUltimaAtualizacao: cidade.updated_at.toLocaleString("pt-BR")
     }
@@ -32,7 +29,7 @@ function geraObjetoRetorno(cidade) {
 module.exports = {
     async listar(req, res) {
         try {
-            const cidades = await cidadeModel.find()
+            const cidades = await cidadeModel.find().populate("estadoId")
             const objetos = geraObjetosRetorno(cidades)
             return res.json(objetos)            
         } catch(e) {

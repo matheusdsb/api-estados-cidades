@@ -13,6 +13,7 @@ export class CidadeListaComponent implements OnInit {
 
   dataSource$ = new Subject<Cidade[]>();
   columns: TableColumn[] = [
+    {id: 'estado', label: 'Estado', resolve: (row: Cidade)  => row.estado.abreviacao },
     {id: 'nome', label: 'Nome' },
     {id: 'dataCriacao', label: 'Criadm em' },
     {id: 'dataUltimaAtualizacao', label: 'Editado em' },
