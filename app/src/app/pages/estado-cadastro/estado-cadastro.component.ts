@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { EstadoService } from '../../services/estado.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Estado } from '../../interfaces/estado-interface';
