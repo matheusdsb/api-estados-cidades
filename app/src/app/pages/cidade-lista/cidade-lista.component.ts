@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Cidade } from '../../interfaces/cidade-interface';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { CidadeService } from '../../services/cidade.service';
 import { TableColumn } from '../../components/table/column-iinterface';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cidade-lista',
@@ -27,16 +29,28 @@ export class CidadeListaComponent implements OnInit {
     }
   ];
 
-  constructor(private cidadeService: CidadeService) { }
+  filterForm: FormGroup = this.fb.group({
+	  search: undefined,
+	});
 
-  carregaLista(): void {
-    this.cidadeService.listaTodas().subscribe(data => {
+  constructor(
+    private cidadeService: CidadeService,
+    private fb: FormBuilder
+  ) { }
+
+  carregaLista(params?: any): void {
+    this.cidadeService.listaTodas(params).subscribe(data => {
       this.dataSource$.next(data);
     });
   }
 
   ngOnInit(): void {
     this.carregaLista();
-  }
 
+    this.filterForm.valueChanges.pipe(
+      debounceTime(400)
+    ).subscribe(data => {
+      this.carregaLista(data);
+    });
+  }
 }

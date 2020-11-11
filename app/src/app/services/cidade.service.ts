@@ -17,8 +17,8 @@ export class CidadeService {
 
   constructor(private http: HttpClient) { }
 
-  listaTodas(): Observable<Cidade[]> {
-    return this.http.get<Cidade[]>(this.apiUrl);
+  listaTodas(params?: any): Observable<Cidade[]> {
+    return this.http.get<Cidade[]>(this.apiUrl, { params });
   }
 
   listaPorId(id: string): Observable<Cidade> {

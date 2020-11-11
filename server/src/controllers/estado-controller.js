@@ -14,10 +14,24 @@ function geraObjetoRetorno(estado) {
     }
 }
 
+function montaBuscaViaRequest(req) {
+    const search = req.query.search;                            
+    if (search) { 
+        return {
+            $or: [
+                {nome: { $regex: new RegExp(search, 'i') }},
+                {abreviacao: search},
+            ]
+        }
+    }
+    return {}
+}
+
 module.exports = {
     async listar(req, res) {
-        try {
-            const estados = await estadoModel.find();            
+        try {            
+            const busca = montaBuscaViaRequest(req);            
+            const estados = await estadoModel.find(busca);            
             return res.json(geraObjetosRetorno(estados))
         } catch(e) {
             res.status(400).send(e.message)

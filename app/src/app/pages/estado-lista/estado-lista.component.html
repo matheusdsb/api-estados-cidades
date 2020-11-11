@@ -1,2 +1,9 @@
 <h1>Lista de Estados</h1>
+<form [formGroup]="filterForm" class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Buscar por nome ou abreviação</mat-label>
+        <input matInput formControlName="search" type="text" placeholder="Nome" />
+    </mat-form-field>
+</form>
+<br/>
 <app-table [dataSource]="dataSource$ | async" [columns]="columns"></app-table>

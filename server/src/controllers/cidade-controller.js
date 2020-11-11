@@ -25,12 +25,20 @@ function geraObjetoRetorno(cidade) {
     }
 }
 
+function montaBuscaViaRequest(req) {
+    const search = req.query.search;                            
+    if (search) { 
+        return { nome: { $regex: new RegExp(search, 'i') }}
+    }
+    return {}
+}
+
 module.exports = {
     async listar(req, res) {
         try {
-            const cidades = await cidadeModel.find().populate("estadoId")
-            const objetos = geraObjetosRetorno(cidades)
-            return res.json(objetos)            
+            const busca = montaBuscaViaRequest(req);   
+            const cidades = await cidadeModel.find(busca).populate("estadoId")            
+            return res.json(geraObjetosRetorno(cidades))            
         } catch(e) {
             res.status(400).send(e.message)
         }

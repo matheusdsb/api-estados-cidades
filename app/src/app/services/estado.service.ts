@@ -17,8 +17,8 @@ export class EstadoService {
 
   constructor(private http: HttpClient) { }
 
-  listaTodos(): Observable<Estado[]> {
-    return this.http.get<Estado[]>(this.apiUrl);
+  listaTodos(params?: any): Observable<Estado[]> {
+    return this.http.get<Estado[]>(this.apiUrl, { params });
   }
 
   listaPorId(id: string): Observable<Estado> {
