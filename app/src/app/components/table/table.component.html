@@ -1,7 +1,7 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="sortData($event)">
       
     <ng-container *ngFor="let col of columns" [matColumnDef]="col.id">
-      <th mat-header-cell *matHeaderCellDef> {{col.label}} </th>
+      <th mat-header-cell *matHeaderCellDef [mat-sort-header]="col.id" [disabled]="col.tipo && col.tipo == 'link'"> {{col.label}} </th>
       <td mat-cell *matCellDef="let element">
         <ng-container *ngIf="!col.tipo || col.tipo == 'valor'">
           {{col.resolve ? col.resolve(element) : element[col.id]}} 

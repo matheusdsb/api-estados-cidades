@@ -6,4 +6,4 @@
     </mat-form-field>
 </form>
 <br/>
-<app-table [dataSource]="dataSource$ | async" [columns]="columns"></app-table>
+<app-table [dataSource]="dataSource$ | async" [columns]="columns" (onSort)="onSortData($event)"></app-table>

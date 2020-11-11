@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,12 +14,13 @@ import { EstadoService } from './services/estado.service';
 import { CidadeListaComponent } from './pages/cidade-lista/cidade-lista.component';
 import { CidadeService } from './services/cidade.service';
 import { EstadoCadastroComponent } from './pages/estado-cadastro/estado-cadastro.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { CidadeCadastroComponent } from './pages/cidade-cadastro/cidade-cadastro.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { MatInputModule } from '@angular/material/input';
     CidadeCadastroComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -39,7 +42,8 @@ import { MatInputModule } from '@angular/material/input';
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSortModule
   ],
   providers: [
     EstadoService,

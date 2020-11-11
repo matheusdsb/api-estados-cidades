@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { CidadeService } from '../../services/cidade.service';
 import { TableColumn } from '../../components/table/column-iinterface';
 import { debounceTime } from 'rxjs/operators';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-cidade-lista',
@@ -51,6 +52,18 @@ export class CidadeListaComponent implements OnInit {
       debounceTime(400)
     ).subscribe(data => {
       this.carregaLista(data);
+    });
+  }
+
+  onSortData(event: Sort): void {
+
+    const sort = {
+      field: event.active,
+      direction: event.direction
+    };
+
+    this.carregaLista({ 
+      sort: JSON.stringify(sort)
     });
   }
 }

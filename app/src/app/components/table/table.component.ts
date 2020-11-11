@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TableColumn } from './column-iinterface';
+import {Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-table',
@@ -10,6 +11,8 @@ export class TableComponent implements OnInit {
 
   @Input() columns: TableColumn[];
   @Input() dataSource = [];
+  @Output() onSort = new EventEmitter<any>();
+
   displayedColumns: string[] = [];
 
   constructor() { }
@@ -18,4 +21,7 @@ export class TableComponent implements OnInit {
     this.displayedColumns = this.columns.map(c => c.id);
   }
 
+  sortData(sort: Sort): void {
+    this.onSort.emit(sort);
+  }
 }

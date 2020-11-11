@@ -1,4 +1,6 @@
 const cidadeModel = require('../models/cidade-model');
+const { montaOrdenacaoViaRequest } = require('../helpers/ordenacao-helper')
+const { geraDataBr } = require('../helpers/timezone-helper')
 
 function loadObjectByRequest(req) {
     return {
@@ -20,8 +22,8 @@ function geraObjetoRetorno(cidade) {
             nome: cidade.estadoId.nome,
             abreviacao: cidade.estadoId.abreviacao
         } : {},
-        dataCriacao: cidade.created_at.toLocaleString("pt-BR"),
-        dataUltimaAtualizacao: cidade.updated_at.toLocaleString("pt-BR")
+        dataCriacao: geraDataBr(cidade.created_at),
+        dataUltimaAtualizacao: geraDataBr(cidade.updated_at)
     }
 }
 
@@ -36,8 +38,9 @@ function montaBuscaViaRequest(req) {
 module.exports = {
     async listar(req, res) {
         try {
-            const busca = montaBuscaViaRequest(req);   
-            const cidades = await cidadeModel.find(busca).populate("estadoId")            
+            const busca = montaBuscaViaRequest(req)
+            const ordenacao = montaOrdenacaoViaRequest(req)
+            const cidades = await cidadeModel.find(busca).populate("estadoId").sort(ordenacao)            
             return res.json(geraObjetosRetorno(cidades))            
         } catch(e) {
             res.status(400).send(e.message)

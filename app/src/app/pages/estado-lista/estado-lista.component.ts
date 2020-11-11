@@ -5,6 +5,7 @@ import { TableColumn } from '../../components/table/column-iinterface';
 import { EstadoService } from '../../services/estado.service';
 import { Estado } from '../../interfaces/estado-interface';
 import { debounceTime } from 'rxjs/operators';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-estado-lista',
@@ -51,6 +52,18 @@ export class EstadoListaComponent implements OnInit {
       debounceTime(400)
     ).subscribe(data => {
       this.carregaLista(data);
+    });
+  }
+
+  onSortData(event: Sort): void {
+
+    const sort = {
+      field: event.active,
+      direction: event.direction
+    };
+
+    this.carregaLista({ 
+      sort: JSON.stringify(sort)
     });
   }
 }
