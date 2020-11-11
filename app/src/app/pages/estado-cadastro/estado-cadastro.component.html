@@ -1,0 +1,37 @@
+<div class="col-sm-8 col-md-8 col-lg-8">
+<h1>Cadastro de estado</h1>
+    
+    <form [formGroup]="form" (ngSubmit)="onSubmit()"  class="example-form">
+        
+        <input type="hidden" formControlName="id" />            
+        
+        <mat-form-field class="form-group">
+            <mat-label>Nome</mat-label>
+            <input type="text" class="form-control" matInput formControlName="nome" placeholder="Nome" required>            
+            <mat-error *ngIf="submited && form.get('nome').hasError('required')">
+                O nome é <strong>obrigatório</strong><br>
+            </mat-error>            
+        </mat-form-field>
+
+        <br/>
+
+        <mat-form-field class="form-group">            
+            <mat-label>Abreviação</mat-label>
+            <input type="text" class="form-control" matInput formControlName="abreviacao" placeholder="Abreviação" required>
+            <mat-error *ngIf="submited && form.get('abreviacao').hasError('required')">
+                A abreviação é <strong>obrigatória</strong><br>
+            </mat-error>
+            <mat-error *ngIf="submited && form.get('abreviacao').hasError('maxlength')">
+                A abreviação deve ter apenas <strong>2 caracteres</strong><br>
+            </mat-error>                
+        </mat-form-field>  
+
+        <br/>
+        
+        <a [routerLink]="['/estados']" class="btn btn-warning">Voltar</a>
+        &nbsp;
+        <button class="btn btn-danger" *ngIf="id" (click)='excluir()' type="button">Excluir</button>
+        &nbsp;                
+        <button class="btn btn-primary" type="submit">Salvar</button>
+    </form>
+</div>
