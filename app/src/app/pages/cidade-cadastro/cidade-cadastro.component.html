@@ -1,1 +1,38 @@
-<p>cidade-cadastro works!</p>
+<div class="col-sm-8 col-md-8 col-lg-8">
+    <h1>Cadastro de cidade</h1>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form">
+
+        <input type="hidden" formControlName="id" />
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Nome</mat-label>
+            <input type="text" class="form-control" matInput formControlName="nome" placeholder="Nome" required>
+            <mat-error *ngIf="submited && form.get('nome').hasError('required')">
+                O nome é <strong>obrigatório</strong><br>
+            </mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="estado" [compareWith]="compareWith">
+                <mat-option value="">Selecione</mat-option>
+                <mat-option *ngFor="let e of estados$ | async" [value]="{id: e.id}">{{e.abreviacao}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="submited && form.get('estado').hasError('required')">
+                O Estado é <strong>obrigatório</strong><br>
+            </mat-error>            
+        </mat-form-field>
+
+        <br/><br/>
+        
+        <a [routerLink]="['/cidades']" class="btn btn-warning">Voltar</a>
+        &nbsp;
+        <button class="btn btn-danger" *ngIf="id" (click)='excluir()' type="button">Excluir</button>
+        &nbsp;
+        <button class="btn btn-primary" type="submit">Salvar</button>
+        
+    </form>
+</div>

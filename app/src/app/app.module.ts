@@ -16,7 +16,9 @@ import { EstadoCadastroComponent } from './pages/estado-cadastro/estado-cadastro
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { CidadeCadastroComponent } from './pages/cidade-cadastro/cidade-cadastro.component';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,10 @@ import { CidadeCadastroComponent } from './pages/cidade-cadastro/cidade-cadastro
     ReactiveFormsModule,
     MatTableModule,
     MatSnackBarModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [
     EstadoService,

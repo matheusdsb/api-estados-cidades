@@ -1,5 +1,4 @@
 const cidadeModel = require('../models/cidade-model');
-const estadoModel = require('../models/estado-model');
 
 function loadObjectByRequest(req) {
     return {
@@ -36,12 +35,25 @@ module.exports = {
             res.status(400).send(e.message)
         }
     },
+    async visualizar(req, res) {
+        try {            
+            const cidade = await cidadeModel.findById(req.params.id).populate("estadoId");
+
+            if(!cidade) {
+                return res.status(404).send('Registro não encontrado')
+            }
+
+            return res.json(geraObjetoRetorno(cidade))
+        } catch(e) {
+            res.status(400).send(e.message)
+        }
+    },      
     async cadastrar(req, res) {
         try { 
             const obj = loadObjectByRequest(req)
 
             const cidade = await cidadeModel.create(obj)
-            return res.json(cidade)
+            return res.json(geraObjetoRetorno(cidade))
         } catch(e) {
             res.status(400).send(e.message)
         }

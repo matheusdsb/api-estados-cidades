@@ -1,11 +1,11 @@
 <div class="col-sm-8 col-md-8 col-lg-8">
-<h1>Cadastro de estado</h1>
+    <h1>Cadastro de estado</h1>
     
     <form [formGroup]="form" (ngSubmit)="onSubmit()"  class="example-form">
         
         <input type="hidden" formControlName="id" />            
         
-        <mat-form-field class="form-group">
+        <mat-form-field class="example-full-width">
             <mat-label>Nome</mat-label>
             <input type="text" class="form-control" matInput formControlName="nome" placeholder="Nome" required>            
             <mat-error *ngIf="submited && form.get('nome').hasError('required')">
@@ -15,7 +15,7 @@
 
         <br/>
 
-        <mat-form-field class="form-group">            
+        <mat-form-field class="example-full-width">            
             <mat-label>Abreviação</mat-label>
             <input type="text" class="form-control" matInput formControlName="abreviacao" placeholder="Abreviação" required>
             <mat-error *ngIf="submited && form.get('abreviacao').hasError('required')">
@@ -26,7 +26,7 @@
             </mat-error>                
         </mat-form-field>  
 
-        <br/>
+        <br/><br/>
         
         <a [routerLink]="['/estados']" class="btn btn-warning">Voltar</a>
         &nbsp;

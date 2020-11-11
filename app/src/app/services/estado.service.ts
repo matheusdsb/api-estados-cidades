@@ -11,7 +11,7 @@ export class EstadoService {
 
   apiUrl = '/api/estados';
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse): Observable<never> {
     return throwError(`Erro ${error.status}: ${error.error}`);
   }
 

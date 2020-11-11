@@ -17,6 +17,14 @@ export class CidadeListaComponent implements OnInit {
     {id: 'nome', label: 'Nome' },
     {id: 'dataCriacao', label: 'Criadm em' },
     {id: 'dataUltimaAtualizacao', label: 'Editado em' },
+    {
+      id: 'links',
+      label: 'Ações',
+      tipo: 'link',
+      links: [
+        {titulo: 'Editar', resolveLink: (row: Cidade) => 'editar/' + row.id}
+      ]
+    }
   ];
 
   constructor(private cidadeService: CidadeService) { }

@@ -15,6 +15,7 @@ router.delete('/estados/excluir/:id', estadoController.excluir)
 const cidadeController = require('./controllers/cidade-controller');
 
 router.get('/cidades', cidadeController.listar)
+router.get('/cidades/:id', cidadeController.visualizar)
 router.post('/cidades/cadastrar', loadEstado, cidadeController.cadastrar)
 router.put('/cidades/editar/:id', loadEstado, cidadeController.editar)
 router.delete('/cidades/excluir/:id', cidadeController.excluir)
